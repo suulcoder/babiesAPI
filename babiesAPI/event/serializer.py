@@ -8,8 +8,8 @@ class EventSerializer(serializers.ModelSerializer):
         model = Event
         fields = (
             'id',
-            'eventType'
-            'datetime'
-            'info'
+            'eventType',
+            'datetime',
+            'info',
             'baby' 
         )

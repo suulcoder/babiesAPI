@@ -7,7 +7,7 @@ class BabySerializer(serializers.ModelSerializer):
         model = Baby
         fields = (
             'id',
-            'name'
-            'lastname'
+            'name',
+            'lastname',
             'parent'
         )

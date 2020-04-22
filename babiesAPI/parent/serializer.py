@@ -8,5 +8,5 @@ class ParentSerializer(serializers.ModelSerializer):
         model = Parent
         fields = (
             'id',
-            'name'
+            'first_name'
         )

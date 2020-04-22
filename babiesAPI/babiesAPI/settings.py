@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'baby.apps.BabyConfig',
     'event.apps.EventConfig',
     'parent.apps.ParentConfig',
+
     'permissions.apps.PermissionsConfig'
 ]
 

@@ -8,7 +8,7 @@ from event.models import Event
 from event.serializer import EventSerializer
 
 def evaluate(user, obj, request):
-    return user.first_name == obj.baby.parent.name
+    return user.first_name == obj.baby.parent.first_name
 
 class EventViewSet(viewsets.ModelViewSet):
     queryset = Event.objects.all()
@@ -22,10 +22,10 @@ class EventViewSet(viewsets.ModelViewSet):
                     'list': True,
                 },
                 'instance': {
-                    'retrieve': 'events.view_event',
+                    'retrieve': evaluate,
                     'destroy': evaluate,
-                    'update': 'event.change_event',
-                    'partial_update': 'event.change_event',
+                    'update': evaluate,
+                    'partial_update': evaluate,
                 }
             }
         ),

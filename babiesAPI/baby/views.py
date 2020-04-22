@@ -5,11 +5,12 @@ from rest_framework.response import Response
 
 from permissions.services import APIPermissionClassFactory
 from baby.models import Baby
+from event.models import Event
 from baby.serializer import BabySerializer
 from event.serializer import EventSerializer
 
 def evaluate(user, obj, request):
-    return user.first_name == obj.parent.name
+    return user.first_name == obj.parent.first_name
 
 class BabyViewSet(viewsets.ModelViewSet):
     queryset = Baby.objects.all()
@@ -20,13 +21,13 @@ class BabyViewSet(viewsets.ModelViewSet):
             permission_configuration={
                 'base': {
                     'create': True,
-                    'list': True,
+                    'list': False,
                 },
                 'instance': {
-                    'retrieve': 'baby.view_baby',
+                    'retrieve': evaluate,
                     'destroy': evaluate,
-                    'update': 'baby.change_baby',
-                    'partial_update': 'baby.change_baby',
+                    'update': evaluate,
+                    'partial_update': evaluate,
                 }
             }
         ),
@@ -42,4 +43,7 @@ class BabyViewSet(viewsets.ModelViewSet):
     @action(detail=True, methods=['get'])
     def events(self, request, pk=None):
         baby = self.get_object()
-        return (Events.objects.filter(baby=baby).data)
+        response = []
+        for event in Events.objects.filter(baby=baby):
+            response.append(EventSerializer(event).data)
+        return Response(response)
