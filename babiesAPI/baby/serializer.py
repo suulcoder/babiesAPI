@@ -2,9 +2,9 @@ from rest_framework import serializers
 
 from baby.models import Baby
 
-class ParentSerializer(serializers.ModelSerializer):
+class BabySerializer(serializers.ModelSerializer):
     class Meta:
-        model = Parent
+        model = Baby
         fields = (
             'id',
             'name'

@@ -7,7 +7,7 @@ class Event(models.Model):
     baby = models.ForeignKey(
         'baby.Baby',
         on_delete=models.SET_NULL,
-        null=False,
+        null=True,
         blank=False
     )
 

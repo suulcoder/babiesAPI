@@ -3,9 +3,9 @@ from rest_framework import serializers
 from event.models import Event
 
 
-class ParentSerializer(serializers.ModelSerializer):
+class EventSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Parent
+        model = Event
         fields = (
             'id',
             'eventType'

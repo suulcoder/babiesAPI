@@ -6,7 +6,7 @@ class Baby(models.Model):
     parent = models.ForeignKey(
         'parent.Parent',
         on_delete=models.SET_NULL,
-        null=False,
+        null=True,
         blank=False
     )
 
